@@ -1,1 +1,20 @@
-<p>product-list works!</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Units in Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let t of product">
+            <td class="align-middle">
+                <img [src]="t.imageUrl" alt="placeholder" height="50">
+            </td>
+            <td class="align-middle">{{t.name}}</td>
+            <td class="align-middle"> {{t.unitPrice | currency: 'INR'}} </td>
+            <td class="align-middle"> {{t.unitInStock}} </td>
+        </tr>
+    </tbody>
+</table>
