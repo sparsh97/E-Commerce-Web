@@ -1,26 +1,67 @@
 <div class="main-content">
-    <div class="section-content section-content-p30">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Loop over the product list -->
-                <div *ngFor = "let prod of product" class="col-md-3">
-                    <div class="product-box">
-                        <a routerLink="/products/{{prod?.id}}">
-                        <img src="{{prod.imageUrl}}" alt="image" class="img-responsive">
-                        </a>
-                        <a routerLink="/products/{{prod?.id}}">
-                        <h1> {{prod.name}} </h1>
-                        </a>
-                        <div class="price"> {{prod.unitPrice | currency: 'INR'}} </div>
-                        <a href="#" class="primary-btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div *ngIf="product?.length == 0" class="alert alert-warning col-md-12" role="alert">
-                    No Prodcuts found.
-                </div>
-            </div>
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Loop over the product list -->
+        <div *ngFor="let prod of product" class="col-md-3">
+          <div class="product-box">
+            <a routerLink="/products/{{ prod?.id }}">
+              <img
+                src="{{ prod.imageUrl }}"
+                alt="image"
+                class="img-responsive"
+              />
+            </a>
+            <a routerLink="/products/{{ prod?.id }}">
+              <h1>{{ prod.name }}</h1>
+            </a>
+            <div class="price">{{ prod.unitPrice | currency: "INR" }}</div>
+            <button (click)="addToCart(prod)" class="btn btn-primary btn-sm">Add to Cart</button>
+          </div>
         </div>
+        <div
+          *ngIf="product?.length == 0"
+          class="alert alert-warning col-md-12"
+          role="alert"
+        >
+          No Prodcuts found.
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9" style="padding-left: 30%">
+                <ngb-pagination [(page)]="thePageNumber"
+                  [pageSize]="thePageSiz"
+                  [collectionSize]="totalElements"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                  (pageChange)="listProduct()"> 
+                </ngb-pagination>
+              </div>
+
+              <div class="col-md-3 mt-2" style="text-align: right;">
+                <span class="mr-2"> Page Size</span>
+                <select (change)="updatePageSize($any($event.target).value)">
+                  <option value="5" selected="true">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
+  </div>
 </div>
 
 <!-- <table class="table">
