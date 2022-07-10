@@ -5,11 +5,18 @@
                 <!-- Loop over the product list -->
                 <div *ngFor = "let prod of product" class="col-md-3">
                     <div class="product-box">
+                        <a routerLink="/products/{{prod?.id}}">
                         <img src="{{prod.imageUrl}}" alt="image" class="img-responsive">
+                        </a>
+                        <a routerLink="/products/{{prod?.id}}">
                         <h1> {{prod.name}} </h1>
+                        </a>
                         <div class="price"> {{prod.unitPrice | currency: 'INR'}} </div>
                         <a href="#" class="primary-btn">Add to Cart</a>
                     </div>
+                </div>
+                <div *ngIf="product?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    No Prodcuts found.
                 </div>
             </div>
         </div>
