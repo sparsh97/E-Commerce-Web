@@ -1,0 +1,223 @@
+<div class="main-content page-m">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+                <!--Custome Form-->
+                <div formGroupName="customer" class="form-area">
+                    <h3>Customer</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>First Name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="firstName">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="lastName">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" formControlName="email">
+                        </div>
+                    </div>
+                </div>
+
+                <!--Shipping-->
+                <div formGroupName="shippingAddress" class="form-area">
+                    <h3>Shipping Address</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Street</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="street">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>City</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="city">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>State</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="state">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Country</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="country">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Zip Code</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="zipCode">
+                        </div>
+                    </div>
+                </div>
+
+                <!--Shopping and Billing address is same-->
+                <div class="input-space">
+                    <label class="au-checkbox">
+                        <input type="checkbox" (change)="copyShippingAddressToBillingAdress($event)">
+                        <span class="au-checkmark"></span>Billing Address same as Shipping Address
+                    </label>
+                </div>
+                <!--Billing Address-->
+                <div formGroupName="billingAddress" class="form-area">
+                    <h3>Billing Address</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label >Street</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="street">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>City</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="city">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>State</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="state">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Country</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="country">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Zip Code</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="zipCode">
+                        </div>
+                    </div>
+                </div>
+
+                <!--Credit Card-->
+                <div formGroupName="creditCard" class="form-area">
+                    <h3>Credit Card Details</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Card Type</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="cardType">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Name On Card</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="nameOnCard">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Card Number</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="cardNumber">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Security Code</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="securityCode">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Expiration Month</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select formControlName="expirationMonth">
+                                <option *ngFor="let month of creditCardMonths">
+                                    {{month}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Expiration Year</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select formControlName="expirationYear" (change)="handleMonthsAndYear()">
+                                <option *ngFor="let year of creditCardYears">
+                                    {{year}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Order Details-->
+                <div class="form-area">
+                    <h3>Review Your Order</h3>
+                    <p>Total Quantity: {{totalQuantity}}</p>
+                    <p>Shipping: Free</p>
+                    <p>Total Price: {{totalPrice | currency: 'USD'}}</p>
+                </div>
+
+
+                <!--submit-->
+                <div class="text-center">
+                    <button class="btn btn-info" type="submit">Purchase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
