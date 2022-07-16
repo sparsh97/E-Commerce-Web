@@ -1,7 +1,9 @@
 package com.ecommerce.config;
 
+import com.ecommerce.entity.Country;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.ProductCategory;
+import com.ecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -26,15 +28,18 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
         HttpMethod[] unSupp = {HttpMethod.DELETE,HttpMethod.POST,HttpMethod.PUT};
 
-        config.getExposureConfiguration().forDomainType(Product.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unSupp)))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unSupp));
-
-        config.getExposureConfiguration().forDomainType(ProductCategory.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unSupp)))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unSupp));
+        disableHttpCallConfig(Product.class,config, unSupp);
+        disableHttpCallConfig(ProductCategory.class,config, unSupp);
+        disableHttpCallConfig(State.class,config, unSupp);
+        disableHttpCallConfig(Country.class,config, unSupp);
 
         exposeIds(config);
+    }
+
+    private void disableHttpCallConfig(Class theClass,RepositoryRestConfiguration config, HttpMethod[] unSupp) {
+        config.getExposureConfiguration().forDomainType(theClass)
+                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unSupp)))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unSupp));
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
