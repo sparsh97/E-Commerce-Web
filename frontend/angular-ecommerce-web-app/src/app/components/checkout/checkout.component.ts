@@ -8,6 +8,7 @@ import {
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { WhiteSpaceValidator } from 'src/app/cvalidators/white-space-validator';
+import { CartItemService } from 'src/app/services/cart-item.service';
 import { FormService } from 'src/app/services/form.service';
 
 @Component({
@@ -25,7 +26,9 @@ export class CheckoutComponent implements OnInit {
   shippingStates: State[] = [];
   billingStates: State[] = [];
 
-  constructor(private fb: FormBuilder, private formService: FormService) {}
+  constructor(private fb: FormBuilder, 
+    private formService: FormService,
+    private cartService: CartItemService) {}
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.fb.group({
@@ -103,6 +106,7 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.getCountriesList();
+    this.reviewCartDetails();
     const startMonth: number = new Date().getMonth() + 1;
     this.formService.getCreditCardMonths(startMonth).subscribe((res) => {
       this.creditCardMonths = res;
@@ -248,5 +252,15 @@ export class CheckoutComponent implements OnInit {
     if (countryCode != null || countryCode != '') {
       this.getBillingStateList(countryCode);
     }
+  }
+
+  reviewCartDetails() {
+    this.cartService.totalPrice.subscribe(data => {
+      this.totalPrice = data;
+    });
+
+    this.cartService.totalQuantity.subscribe(data => {
+      this.totalQuantity = data;
+    })
   }
 }
