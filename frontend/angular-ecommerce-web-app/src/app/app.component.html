@@ -1,15 +1,17 @@
 <div class="page-wrapper">
-
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
       <a href="#">
-        <img src="assets/images/logo.png" alt="luv2learn" class="img-responsive">
+        <img
+          src="assets/images/logo.png"
+          alt="luv2learn"
+          class="img-responsive"
+        />
       </a>
     </div>
-   <app-product-category></app-product-category>
+    <app-product-category></app-product-category>
   </aside>
-
 
   <div class="page-container">
     <!-- HEADER DESKTOP-->
@@ -18,6 +20,7 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-search></app-search>
+            <app-login-status></app-login-status>
             <app-cart-status></app-cart-status>
           </div>
           <div class="account-wrap"></div>
@@ -27,7 +30,6 @@
 
     <router-outlet></router-outlet>
     <!-- <app-product-list></app-product-list> -->
-
   </div>
 </div>
 

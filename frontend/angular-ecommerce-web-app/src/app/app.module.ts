@@ -15,7 +15,26 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { OktaAuthModule, OKTA_CONFIG,OktaCallbackComponent } from '@okta/okta-angular';
+import appConfig from './config/app-config';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { Router } from '@angular/router';
+import { MemberPageComponent } from './components/member-page/member-page.component';
 
+
+const oktaConfig =  appConfig.oidc;
+
+const oktaAuth = new OktaAuth(oktaConfig);
+
+function onAuthRequired(oktaAuth: any, injector: any) {
+  // Use injector to access any service available within your application
+  const router = injector.get(Router);
+
+  // Redirect the user to your custom login page
+  router.navigate(['/login']);
+}
 
 @NgModule({
   declarations: [
@@ -26,7 +45,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginComponent,
+    LoginStatusComponent,
+    MemberPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +56,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OktaAuthModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,{ provide: OKTA_CONFIG, useValue: {oktaAuth}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
