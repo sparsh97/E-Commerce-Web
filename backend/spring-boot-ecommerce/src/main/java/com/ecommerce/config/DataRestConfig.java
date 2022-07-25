@@ -5,6 +5,7 @@ import com.ecommerce.entity.Product;
 import com.ecommerce.entity.ProductCategory;
 import com.ecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -20,18 +21,23 @@ import java.util.Set;
 @Configuration
 public class DataRestConfig implements RepositoryRestConfigurer {
 
+    @Value("${allowed.origins}")
+    private String origin;
+    @Value("${spring.data.rest.base-path}")
+    private String basePath;
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
-        HttpMethod[] unSupp = {HttpMethod.DELETE,HttpMethod.POST,HttpMethod.PUT};
+        HttpMethod[] unSupp = {HttpMethod.DELETE, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH};
 
         disableHttpCallConfig(Product.class,config, unSupp);
         disableHttpCallConfig(ProductCategory.class,config, unSupp);
         disableHttpCallConfig(State.class,config, unSupp);
         disableHttpCallConfig(Country.class,config, unSupp);
+        cors.addMapping(basePath + "/**").allowedOrigins(origin);
 
         exposeIds(config);
     }
