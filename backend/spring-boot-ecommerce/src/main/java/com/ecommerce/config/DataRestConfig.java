@@ -1,9 +1,6 @@
 package com.ecommerce.config;
 
-import com.ecommerce.entity.Country;
-import com.ecommerce.entity.Product;
-import com.ecommerce.entity.ProductCategory;
-import com.ecommerce.entity.State;
+import com.ecommerce.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +34,8 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpCallConfig(ProductCategory.class,config, unSupp);
         disableHttpCallConfig(State.class,config, unSupp);
         disableHttpCallConfig(Country.class,config, unSupp);
+        disableHttpCallConfig(Order.class,config,unSupp);
+
         cors.addMapping(basePath + "/**").allowedOrigins(origin);
 
         exposeIds(config);

@@ -31,7 +31,7 @@ export class CheckoutComponent implements OnInit {
   shippingStates: State[] = [];
   billingStates: State[] = [];
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
     private formService: FormService,
     private cartService: CartItemService,
     private checkoutService: CheckoutService,
@@ -183,17 +183,17 @@ export class CheckoutComponent implements OnInit {
   }
   get creditCardMonth() {
     return this.checkoutFormGroup.get('creditCard.expirationMonth');
-  }  
+  }
   get creditCardYear() {
     return this.checkoutFormGroup.get('creditCard.expirationYear');
-  }  
+  }
 
   onSubmit() {
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
       return;
-    } 
-    
+    }
+
     let order = new Order();
     order.totalPrice = this.totalPrice;
     order.totalQuantity = this.totalQuantity;
@@ -225,7 +225,7 @@ export class CheckoutComponent implements OnInit {
       next: res => {
         alert(`Your order has been received.\nOrder tracking number: ${res?.orderTrackingNumber}`);
         this.resetCart();
-      }, 
+      },
       error: err=> console.log(err?.message)
     });
 
@@ -233,7 +233,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutFormGroup.get('shippingAddress')?.value);
     console.log(this.checkoutFormGroup.get('billingAddress')?.value);
   }
-  
+
   resetCart() {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
