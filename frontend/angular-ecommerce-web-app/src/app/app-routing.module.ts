@@ -8,12 +8,14 @@ import { MemberPageComponent } from './components/member-page/member-page.compon
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'sign-up', component: SignUpComponent},
   {path: 'order-history', component: OrderHistoryComponent,canActivate: [OktaAuthGuard]},
   {path: 'members', component: MemberPageComponent,canActivate: [OktaAuthGuard]},
-  {path: 'login/callback', component: OktaCallbackComponent},
-  {path: 'login', component: LoginComponent},
+  // {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
@@ -21,8 +23,8 @@ const routes: Routes = [
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
   {path: 'products', component: ProductListComponent},
-  {path: '', redirectTo: "/products", pathMatch: 'full'},
-  {path: '**', redirectTo: "/products", pathMatch: 'full'},
+  {path: '', redirectTo: "/login", pathMatch: 'full'},
+  {path: '**', redirectTo: "/login", pathMatch: 'full'},
 ];
 
 @NgModule({

@@ -1,5 +1,7 @@
 <div class="page-wrapper">
   <!-- MENU SIDEBAR-->
+  <app-login></app-login>
+  <div *ngIf="isToken">
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
       <a href="#">
@@ -28,9 +30,11 @@
       </div>
     </header>
 
-    <router-outlet></router-outlet>
+
     <!-- <app-product-list></app-product-list> -->
   </div>
+  </div>
+  <router-outlet></router-outlet>
 </div>
 
 <footer>

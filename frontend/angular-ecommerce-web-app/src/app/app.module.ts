@@ -23,20 +23,22 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import { Router } from '@angular/router';
 import { MemberPageComponent } from './components/member-page/member-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
-import { AuthInterceptorServiceService } from './services/auth-interceptor-service.service';
+//import { AuthInterceptorServiceService } from './services/auth-interceptor-service.service';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { JwtInterceptorService } from './services/jwt-interceptor.service';
 
 
-const oktaConfig =  appConfig.oidc;
+// const oktaConfig =  appConfig.oidc;
 
-const oktaAuth = new OktaAuth(oktaConfig);
+// const oktaAuth = new OktaAuth(oktaConfig);
 
-function onAuthRequired(oktaAuth: any, injector: any) {
-  // Use injector to access any service available within your application
-  const router = injector.get(Router);
+// function onAuthRequired(oktaAuth: any, injector: any) {
+//   // Use injector to access any service available within your application
+//   const router = injector.get(Router);
 
-  // Redirect the user to your custom login page
-  router.navigate(['/login']);
-}
+//   // Redirect the user to your custom login page
+//   router.navigate(['/login']);
+// }
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ function onAuthRequired(oktaAuth: any, injector: any) {
     LoginStatusComponent,
     MemberPageComponent,
     OrderHistoryComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,10 +63,13 @@ function onAuthRequired(oktaAuth: any, injector: any) {
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    OktaAuthModule
+    //OktaAuthModule
   ],
-  providers: [ProductService,{ provide: OKTA_CONFIG, useValue: {oktaAuth}},
-            {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorServiceService,multi: true}],
+  // providers: [ProductService,{ provide: OKTA_CONFIG, useValue: {oktaAuth}},
+  //           {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorServiceService,multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

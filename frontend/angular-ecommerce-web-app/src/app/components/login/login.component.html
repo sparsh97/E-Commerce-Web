@@ -1,5 +1,21 @@
-<div class="pt-5">
+<!-- <div class="pt-5">
   <div id="okta-sign-in-widget" class="pt-5">
 
+  </div>
+</div> -->
+
+
+<div class="container" style="margin: 4rem; padding: 14rem;">
+  <div class="p-4 m-4">
+    <form [formGroup]="loginForm">
+      <label for="username"> Username &nbsp;</label>
+      <input formControlName="username" type="text" name="username" id="username">
+      <br>
+      <label for="pasword">Password&nbsp;</label>
+      <input formControlName="password" type="text" name="password" id="password">
+      <br>
+      <a (click)="signUp()">Sign-up</a>
+      <button class="btn btn-default btn-sm" (click)="onLogin()">Login</button>
+    </form>
   </div>
 </div>

@@ -30,11 +30,11 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
         HttpMethod[] unSupp = {HttpMethod.DELETE, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH};
 
-        disableHttpCallConfig(Product.class,config, unSupp);
-        disableHttpCallConfig(ProductCategory.class,config, unSupp);
-        disableHttpCallConfig(State.class,config, unSupp);
-        disableHttpCallConfig(Country.class,config, unSupp);
-        disableHttpCallConfig(Order.class,config,unSupp);
+//        disableHttpCallConfig(Product.class,config, unSupp);
+//        disableHttpCallConfig(ProductCategory.class,config, unSupp);
+//        disableHttpCallConfig(State.class,config, unSupp);
+//        disableHttpCallConfig(Country.class,config, unSupp);
+//        disableHttpCallConfig(Order.class,config,unSupp);
 
         cors.addMapping(basePath + "/**").allowedOrigins(origin);
 
