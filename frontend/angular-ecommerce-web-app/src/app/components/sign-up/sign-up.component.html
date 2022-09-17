@@ -1,0 +1,19 @@
+<div class="contaner" style="margin: 4rem; padding: 4rem">
+  <div>
+    <form [formGroup]="signUpForm">
+      <label for="firstName">First Name: </label>
+      <input formControlName="firstName" type="text" name="firstName" id="firstName">
+
+      <label for="lastName">Last Name: </label>
+      <input formControlName="lastName" type="text" name="lastName" id="lastName">
+
+      <label for="username">User Name: </label>
+      <input formControlName="username" type="text" name="username" id="username">
+
+      <label for="password">First Name: </label>
+      <input formControlName="password" type="text" name="password" id="password">
+
+      <button class="btn btn-primary" (click)="userCreate()">Create</button>
+    </form>
+  </div>
+</div>
